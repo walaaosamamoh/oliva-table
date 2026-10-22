@@ -35,10 +35,10 @@ export default function Navbar() {
             to={item.to}
             end={item.to === "/"}
             className={({ isActive }) =>
-              `py-1 border-b-2 ${
+              `py-2 border-b-2 ${
                 isActive
-                  ? "border-terracotta"
-                  : "border-transparent hover:border-sand"
+                  ? "border-olive"
+                  : "border-transparent hover:border-olive"
               }`
             }
           >

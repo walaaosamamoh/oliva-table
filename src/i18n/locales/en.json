@@ -7,6 +7,14 @@
     "cart": "Shopping Cart",
     "language": "Language"
   },
+  "hero": {
+    "eyebrow": "A Taste of the Mediterranean",
+    "titleFirstLine": "Good Food.",
+    "titleSecondLine": "Beautiful Moments.",
+    "description": "Discover fresh ingredients, authentic Mediterranean flavors, and dishes made to bring people together.",
+    "orderNow": "Order Now",
+    "exploreMenu": "Explore Our Menu"
+  },
   "search": {
     "placeholder": "Search dishes...",
     "button": "Search",
