@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "home": "الرئيسية",
+    "menu": "قائمة الطعام",
+    "about": "من نحن",
+    "contact": "تواصل معنا",
+    "cart": "سلة التسوق",
+    "language": "اللغة"
+  },
+  "search": {
+    "placeholder": "ابحث عن الأطباق...",
+    "button": "بحث",
+    "open": "فتح البحث",
+    "close": "إغلاق البحث"
+  },
+  "accessibility": {
+    "searchDishes": "البحث عن الأطباق",
+    "cart": "سلة التسوق",
+    "mobileNavigation": "قائمة التنقل",
+    "chooseLanguage": "اختيار اللغة"
+  }
+}

@@ -2,28 +2,29 @@ import { ChevronDown, Menu, Search, ShoppingCart, X } from "lucide-react";
 import { Link, NavLink } from "react-router";
 import logo from "../../assets/logo.png";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Navbar() {
   const navList = [
-    { label: "Home", to: "/" },
-    { label: "Menu", to: "/menu" },
-    { label: "About", to: "/about" },
-    { label: "Contact", to: "/contact" },
+    { labelKey: "nav.home", to: "/" },
+    { labelKey: "nav.menu", to: "/menu" },
+    { labelKey: "nav.about", to: "/about" },
+    { labelKey: "nav.contact", to: "/contact" },
   ];
 
   const [open, setOpen] = useState(false);
-  const [language, setLanguage] = useState<"en" | "ar">("en");
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const { t, i18n } = useTranslation();
+  const language = i18n.resolvedLanguage?.startsWith("ar") ? "ar" : "en";
+  const changeLanguage = (lang: "en" | "ar") => {
+    void i18n.changeLanguage(lang);
+  };
 
   return (
     <header className="relative flex justify-between items-center px-4 md:px-8 text-olive">
       <Link to="/" className="flex items-center gap-2 font-bold">
-        <img
-          src={logo}
-          alt=""
-          className="h-12 w-12 md:h-16 md:w-16"
-        />
+        <img src={logo} alt="" className="h-12 w-12 md:h-16 md:w-16" />
         <span className="text-xl md:text-2xl uppercase">Oliva Table</span>
       </Link>
 
@@ -41,7 +42,7 @@ export default function Navbar() {
               }`
             }
           >
-            {item.label}
+            {t(item.labelKey)}
           </NavLink>
         ))}
       </nav>
@@ -53,7 +54,7 @@ export default function Navbar() {
             setSearchOpen((prev) => !prev);
             setOpen(false);
           }}
-          aria-label={searchOpen ? "Close search" : "Open search"}
+          aria-label={searchOpen ? t('search.close') : t('search.open')}
           aria-expanded={searchOpen}
           className="grid size-11 place-items-center rounded-full text-olive transition-colors hover:bg-sand/30 focus-visible:outline-2 focus-visible:outline-terracotta"
         >
@@ -73,10 +74,10 @@ export default function Navbar() {
         </Link>
         <div className="relative hidden md:block">
           <select
-            aria-label="Language"
+            aria-label={t('accessibility.chooseLanguage')}
             value={language}
-            onChange={(e) => setLanguage(e.target.value as "en" | "ar")}
-            className="h-10 cursor-pointer appearance-none rounded-full border border-sand/70 bg-transparent py-2 pl-3 pr-9 text-sm font-semibold text-olive transition-colors hover:bg-sand/30 outline-none"
+            onChange={(e) => changeLanguage(e.target.value as "en" | "ar")}
+            className="h-10 cursor-pointer appearance-none rounded-full border border-sand/70 bg-transparent py-2 ps-3 pe-9 text-sm font-semibold text-olive transition-colors hover:bg-sand/30 outline-none"
           >
             <option value="en" className="bg-cream text-olive">
               EN
@@ -87,7 +88,7 @@ export default function Navbar() {
           </select>
           <ChevronDown
             aria-hidden="true"
-            className="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-olive"
+            className="pointer-events-none absolute inset-e-3 top-1/2 size-4 -translate-y-1/2 text-olive"
           />
         </div>
         <button
@@ -114,7 +115,7 @@ export default function Navbar() {
               console.log("Search:", query);
             }
           }}
-          className="absolute inset-x-4 top-full z-20 mt-2 flex items-center gap-3 rounded-xl border border-sand/70 bg-cream p-3 shadow-lg md:inset-x-auto md:right-8 md:w-96"
+          className="absolute inset-x-4 top-full z-20 mt-2 flex items-center gap-3 rounded-xl border border-sand/70 bg-cream p-3 shadow-lg md:inset-x-auto md:inset-e-8 md:w-96"
         >
           <Search className="size-5 shrink-0 text-olive" />
 
@@ -122,8 +123,8 @@ export default function Navbar() {
             type="search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search dishes..."
-            aria-label="Search dishes"
+            placeholder={t('search.placeholder')}
+            aria-label= {t('accessibility.searchDishes')}
             autoFocus
             className="min-w-0 flex-1 bg-transparent text-sm text-charcoal outline-none placeholder:text-charcoal/50"
           />
@@ -132,7 +133,7 @@ export default function Navbar() {
             type="submit"
             className="rounded-full bg-olive px-4 py-2 text-xs font-semibold text-cream transition-colors hover:bg-charcoal"
           >
-            Search
+            {t('search.button')}
           </button>
         </form>
       )}
@@ -160,7 +161,7 @@ export default function Navbar() {
               >
                 {({ isActive }) => (
                   <>
-                    <span>{item.label}</span>
+                    <span>{t(item.labelKey)}</span>
                     {isActive && (
                       <span className="h-1.5 w-1.5 rounded-full bg-terracotta" />
                     )}
@@ -177,13 +178,13 @@ export default function Navbar() {
             className="mt-3 flex items-center gap-3 rounded-lg border border-sand/70 px-4 py-3.5 text-sm font-medium text-olive transition-colors hover:bg-sand/20"
           >
             <ShoppingCart className="size-5" strokeWidth={1.7} />
-            <span>Shopping Cart</span>
+            <span>{t('nav.cart')}</span>
           </Link>
 
           {/* Language selector */}
           <div className="mt-4 flex items-center justify-between border-t border-sand/70 pt-4">
             <span className="text-xs font-medium uppercase tracking-widest text-charcoal/60">
-              Language
+              {t('nav.language')}
             </span>
 
             <div
@@ -192,17 +193,18 @@ export default function Navbar() {
               aria-label="Choose language"
             >
               {/* Sliding active background */}
+
               <span
-                className={`absolute top-1 bottom-1 w-[calc(50%-4px)] rounded-full bg-olive shadow-sm transition-transform duration-300 ease-in-out ${
+                className={`absolute top-1 bottom-1 inset-s-1 w-[calc(50%-4px)] rounded-full bg-olive shadow-sm transition-transform duration-300 ease-in-out ${
                   language === "ar"
-                    ? "translate-x-[calc(100%+4px)]"
+                    ? "ltr:translate-x-[calc(100%)] rtl:-translate-x-[calc(100%)]"
                     : "translate-x-0"
                 }`}
               />
 
               <button
                 type="button"
-                onClick={() => setLanguage("en")}
+                onClick={() => changeLanguage("en")}
                 aria-pressed={language === "en"}
                 className={`relative z-10 flex-1 rounded-full py-2 text-xs font-semibold transition-colors duration-200 ${
                   language === "en" ? "text-cream" : "text-olive"
@@ -213,7 +215,7 @@ export default function Navbar() {
 
               <button
                 type="button"
-                onClick={() => setLanguage("ar")}
+                onClick={() => changeLanguage("ar")}
                 aria-pressed={language === "ar"}
                 className={`relative z-10 flex-1 rounded-full py-2 text-xs font-semibold transition-colors duration-200 ${
                   language === "ar" ? "text-cream" : "text-olive"

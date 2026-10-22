@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "about": "About",
+    "contact": "Contact",
+    "cart": "Shopping Cart",
+    "language": "Language"
+  },
+  "search": {
+    "placeholder": "Search dishes...",
+    "button": "Search",
+    "open": "Open search",
+    "close": "Close search"
+  },
+  "accessibility": {
+    "searchDishes": "Search dishes",
+    "cart": "Cart",
+    "mobileNavigation": "Mobile navigation",
+    "chooseLanguage": "Choose language"
+  }
+}
