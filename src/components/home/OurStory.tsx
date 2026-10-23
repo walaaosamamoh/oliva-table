@@ -1,7 +1,7 @@
 
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
-import storyBowl from "../../assets/story-bowl.png";
+import storyBowl from "../../assets/storyBowl.jpg";
 
 export default function OurStory() {
   const { t } = useTranslation();
