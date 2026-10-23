@@ -46,5 +46,13 @@
     "hours": "12:00 PM – 11:00 PM",
     "comeVisit": "Come Visit Us",
     "address": "123 Nasr City, Egypt"
+  },
+  "featured": {
+    "title": "Featured Dishes",
+    "subtitle": "Fresh favorites, made daily",
+    "viewAll": "View All",
+    "loading": "Loading featured dishes...",
+    "error": "Unable to load featured dishes. Please try again later.",
+    "empty": "No featured dishes available right now."
   }
 }
