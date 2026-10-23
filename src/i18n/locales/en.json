@@ -26,5 +26,11 @@
     "cart": "Cart",
     "mobileNavigation": "Mobile navigation",
     "chooseLanguage": "Choose language"
+  },
+  "story": {
+    "eyebrow": "Our Story",
+    "title": "A Table for Good Moments.",
+    "description": "At Oliva Table, we bring people together through fresh ingredients, authentic Mediterranean flavors, and the joy of sharing good food.",
+    "learnMore": "Learn More"
   }
 }
