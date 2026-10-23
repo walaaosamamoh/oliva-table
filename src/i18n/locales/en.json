@@ -32,5 +32,19 @@
     "title": "A Table for Good Moments.",
     "description": "At Oliva Table, we bring people together through fresh ingredients, authentic Mediterranean flavors, and the joy of sharing good food.",
     "learnMore": "Learn More"
+  },
+  "visitInfo": {
+    "title": "Delivery & Pickup",
+    "description": "Choose how you would like to enjoy your favorites.",
+    "delivery": "Delivery",
+    "pickup": "Pickup",
+    "exploreDelivery": "Explore our menu for delivery",
+    "explorePickup": "Explore our menu for pickup",
+    "openingHours": "Opening Hours",
+    "everyDay": "Every Day",
+    "visitOrOrder": "Visit us or order your favorites",
+    "hours": "12:00 PM – 11:00 PM",
+    "comeVisit": "Come Visit Us",
+    "address": "123 Nasr City, Egypt"
   }
 }
