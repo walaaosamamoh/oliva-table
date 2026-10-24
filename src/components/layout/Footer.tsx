@@ -17,7 +17,7 @@ export default function Footer() {
   return (
     <footer
       dir={isArabic ? "rtl" : "ltr"}
-      className="bg-olive px-6 py-12 text-cream md:px-16 lg:px-24"
+      className="bg-olive px-6 py-12 text-cream md:px-16 lg:px-24 mt-auto w-full shrink-0"
     >
       <div className="flex flex-col items-center justify-between gap-8 md:flex-row">
         <NavLink to="/" aria-label={t("nav.home")}>
