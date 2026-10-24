@@ -22,7 +22,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="relative flex justify-between items-center px-4 md:px-8 text-olive">
+    <header className="relative flex justify-between items-center border-b border-b-sand/50 py-2 px-4 md:px-8 text-olive">
       <Link to="/" className="flex items-center gap-2 font-bold">
         <img src={logo} alt="" className="h-12 w-12 md:h-16 md:w-16" />
         <span className="text-xl md:text-2xl uppercase">Oliva Table</span>
