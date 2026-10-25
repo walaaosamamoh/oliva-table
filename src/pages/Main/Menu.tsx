@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useCategories } from "../../hooks/useCategories";
 import { useMenuDishes } from "../../hooks/useMenuDishes";
-import DishCard from "../../components/common/DishCard";
+import MenuItemCard from "../../components/menu/MenuItemCard";
 
 export default function Menu() {
   const { data: menuDishes, isPending, isError } = useMenuDishes();
@@ -74,9 +74,9 @@ export default function Menu() {
       </div>
 
       {filteredDishes?.length ? (
-        <div className="grid grid-cols-1 items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 items-stretch gap-4 lg:grid-cols-2 lg:gap-6">
           {filteredDishes.map((dish) => (
-            <DishCard
+            <MenuItemCard
               key={dish.id}
               dish={dish}
               language={language}
