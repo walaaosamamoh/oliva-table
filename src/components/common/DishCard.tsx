@@ -55,7 +55,7 @@ export default function DishCard({
         {/* Bottom Actions */}
         <div className="mt-auto flex items-center justify-between gap-3 pt-5">
           <Link
-            to={`/dish-details/${dish.id}`}
+            to={`/menu/${dish.id}`}
             className="inline-flex items-center gap-1.5 text-sm font-medium text-olive transition-colors hover:text-terracotta"
           >
             {isArabic ? "اكتشف الطبق" : "Explore Dish"}

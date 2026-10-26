@@ -3,6 +3,7 @@ import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/Main/Home";
 import NotFound from "../pages/NotFound";
 import Menu from "../pages/Main/Menu";
+import DishDetails from "../pages/Main/DishDetails";
 
 export const router = createBrowserRouter([
    {
@@ -15,6 +16,10 @@ export const router = createBrowserRouter([
         {
             path: '/menu',
             element: <Menu/>
+        },
+        {
+            path: '/menu/:id',
+            element: <DishDetails/>
         }
       ]
    },
