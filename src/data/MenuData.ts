@@ -4,6 +4,12 @@ import bruschetta from '../assets/menuDishes/bruschetta.jpg'
 import pasta from '../assets/menuDishes/creamy-mushroom-pasta.jpg'
 import grilledChicken from '../assets/menuDishes/grilled-chicken.jpg'
 import pizza from '../assets/menuDishes/margherita-pizza.jpg'
+import grilledSalmon from '../assets/menuDishes/grilled-salmon.jpg'
+import vegetableRisotto from '../assets/menuDishes/vegetable-risotto.jpg'
+import tiramisu from '../assets/menuDishes/tiramisu.jpg'
+import pannaCotta from '../assets/menuDishes/panna-cotta.jpg'
+import lemonade from '../assets/menuDishes/lemonade.jpg'
+import icedCoffee from '../assets/menuDishes/iced-coffee.jpg'
 
 export interface MenuItem {
   id: string;
@@ -127,7 +133,7 @@ export const menuData: MenuItem[] = [
     },
     price: 420,
     category: "main-courses",
-    image: "/images/menu/grilled-salmon.webp",
+    image: grilledSalmon,
     isFeatured: false,
   },
   {
@@ -142,7 +148,7 @@ export const menuData: MenuItem[] = [
     },
     price: 290,
     category: "main-courses",
-    image: "/images/menu/vegetable-risotto.webp",
+    image: vegetableRisotto,
     isFeatured: false,
   },
 
@@ -159,7 +165,7 @@ export const menuData: MenuItem[] = [
     },
     price: 160,
     category: "desserts",
-    image: "/images/menu/tiramisu.webp",
+    image: tiramisu,
     isFeatured: false,
   },
   {
@@ -174,7 +180,7 @@ export const menuData: MenuItem[] = [
     },
     price: 150,
     category: "desserts",
-    image: "/images/menu/panna-cotta.webp",
+    image: pannaCotta,
     isFeatured: false,
   },
 
@@ -191,7 +197,7 @@ export const menuData: MenuItem[] = [
     },
     price: 95,
     category: "drinks",
-    image: "/images/menu/mint-lemonade.webp",
+    image: lemonade,
     isFeatured: false,
   },
   {
@@ -206,7 +212,7 @@ export const menuData: MenuItem[] = [
     },
     price: 110,
     category: "drinks",
-    image: "/images/menu/iced-coffee.webp",
+    image: icedCoffee,
     isFeatured: false,
   },
 ];
