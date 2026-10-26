@@ -4,6 +4,7 @@ import Home from "../pages/Main/Home";
 import NotFound from "../pages/NotFound";
 import Menu from "../pages/Main/Menu";
 import DishDetails from "../pages/Main/DishDetails";
+import Cart from "../pages/Main/Cart";
 
 export const router = createBrowserRouter([
    {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
         {
             path: '/menu/:id',
             element: <DishDetails/>
+        },
+        {
+            path: '/cart',
+            element: <Cart/>
         }
       ]
    },

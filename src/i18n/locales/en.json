@@ -54,5 +54,24 @@
     "loading": "Loading featured dishes...",
     "error": "Unable to load featured dishes. Please try again later.",
     "empty": "No featured dishes available right now."
+  },
+  "cart": {
+    "title": "Your Cart",
+    "subtitle": "Review your items before checkout",
+    "empty": "Your cart is empty",
+    "emptyDescription": "Explore our menu and discover your favorite dishes.",
+    "exploreMenu": "Explore Menu",
+    "removeItem": "Remove {{name}} from cart",
+    "removeItemTitle": "Remove item",
+    "decreaseQuantity": "Decrease quantity",
+    "increaseQuantity": "Increase quantity",
+    "items": "Items ({{count}})",
+    "delivery": "Delivery",
+    "deliveryLater": "Calculated later",
+    "subtotal": "Subtotal",
+    "orderSummary": "Order Summary",
+    "deliveryNote": "Delivery and any additional fees will be calculated at checkout.",
+    "checkout": "Checkout",
+    "continueShopping": "Continue Shopping"
   }
 }

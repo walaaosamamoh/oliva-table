@@ -9,6 +9,8 @@ export type CartItem = MenuItem & {
 interface CartStore {
   cart: CartItem[];
   addToCart: (dish: MenuItem, qty?: number) => void;
+  removeFromCart: (dishId: string) => void;
+  updateQuantity: (dishId: string, qty: number) => void;
 }
 
 export const useCartStore = create<CartStore>()(
@@ -32,6 +34,26 @@ export const useCartStore = create<CartStore>()(
 
           return { cart: updatedCart };
         });
+      },
+
+      removeFromCart: (dishId) => {
+        set((state) => ({
+          cart: state.cart.filter((item) => item.id !== dishId),
+        }));
+      },
+
+      updateQuantity: (dishId, qty) => {
+        if (qty < 1) {
+          set((state) => ({
+            cart: state.cart.filter((item) => item.id !== dishId),
+          }));
+          return;
+        }
+        set((state) => ({
+          cart: state.cart.map((item) =>
+            item.id === dishId ? { ...item, qty } : item,
+          ),
+        }));
       },
     }),
     { name: "oliva-table-cart" },
