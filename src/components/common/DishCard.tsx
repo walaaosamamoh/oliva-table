@@ -5,13 +5,13 @@ import { Link } from "react-router";
 interface DishCardProps {
   dish: MenuItem;
   language: "en" | "ar";
-//   onAddToCart: (dish: MenuItem) => void;
+  addToCart: (dish: MenuItem) => void;
 }
 
 export default function DishCard({
   dish,
   language,
-//   onAddToCart,
+  addToCart,
 }: DishCardProps) {
   const isArabic = language === "ar";
 
@@ -64,7 +64,7 @@ export default function DishCard({
 
           <button
             type="button"
-            // onClick={() => onAddToCart(dish)}
+            onClick={() => addToCart(dish)}
             aria-label={
               isArabic
                 ? `أضف ${dish.name.ar} إلى السلة`

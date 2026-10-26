@@ -4,13 +4,13 @@ import type { MenuItem } from "../../data/MenuData";
 interface MenuItemCardProps {
   dish: MenuItem;
   language: "en" | "ar";
-  //   onAddToCart: (dish: MenuItem) => void;
+  addToCart: (dish: MenuItem) => void;
 }
 
 export default function MenuItemCard({
   dish,
   language,
-  //   onAddToCart,
+  addToCart,
 }: MenuItemCardProps) {
   const isArabic = language === "ar";
 
@@ -59,7 +59,7 @@ export default function MenuItemCard({
       <div className="flex shrink-0 items-end p-3 sm:items-center sm:p-4">
         <button
           type="button"
-          //   onClick={() => onAddToCart(dish)}
+          onClick={() => addToCart(dish)}
           aria-label={
             isArabic
               ? `أضف ${dish.name.ar} إلى السلة`

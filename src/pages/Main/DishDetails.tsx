@@ -5,11 +5,13 @@ import { Minus, Plus } from "lucide-react";
 import { useDish } from "../../hooks/useDish";
 import { useMenuDishes } from "../../hooks/useMenuDishes";
 import DishCard from "../../components/common/DishCard";
+import { useCartStore } from "../../store/cartStore";
 
 export default function DishDetails() {
   const { id } = useParams();
   const { data: dish, isPending, isError } = useDish(id!);
   const { data: menuDishes } = useMenuDishes();
+  const addToCart = useCartStore((state)=> state.addToCart)
 
   const { i18n } = useTranslation();
   const language = i18n.resolvedLanguage?.startsWith("ar") ? "ar" : "en";
@@ -124,9 +126,7 @@ export default function DishDetails() {
 
             <button
               type="button"
-              onClick={() => {
-                console.log("Add to cart:", { dish, quantity });
-              }}
+              onClick={()=>addToCart(dish, quantity)}
               className="w-full rounded-xl bg-olive px-6 py-3 font-medium text-cream transition-colors hover:bg-terracotta focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-olive active:scale-[0.98] sm:w-auto"
             >
               {isArabic ? "أضف إلى السلة" : "Add to Cart"}
@@ -146,6 +146,7 @@ export default function DishDetails() {
                     key={relatedDish.id}
                     dish={relatedDish}
                     language={language}
+                    addToCart = {addToCart}
                   />
                 ))}
               </div>

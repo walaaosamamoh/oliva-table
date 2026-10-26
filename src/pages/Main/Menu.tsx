@@ -3,9 +3,11 @@ import { useTranslation } from "react-i18next";
 import { useCategories } from "../../hooks/useCategories";
 import { useMenuDishes } from "../../hooks/useMenuDishes";
 import MenuItemCard from "../../components/menu/MenuItemCard";
+import { useCartStore } from "../../store/cartStore";
 
 export default function Menu() {
   const { data: menuDishes, isPending, isError } = useMenuDishes();
+  const addToCart = useCartStore((state)=> state.addToCart)
 
   const {
     data: categories,
@@ -80,6 +82,7 @@ export default function Menu() {
               key={dish.id}
               dish={dish}
               language={language}
+              addToCart = {addToCart}
             />
           ))}
         </div>

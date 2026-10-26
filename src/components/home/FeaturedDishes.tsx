@@ -3,10 +3,12 @@ import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { useFeaturedDishes } from "../../hooks/useFeaturedDishes";
 import DishCard from "../common/DishCard";
+import { useCartStore } from "../../store/cartStore";
 
 export default function FeaturedDishes() {
   const { t, i18n } = useTranslation();
   const { data, isPending, isError } = useFeaturedDishes();
+  const addToCart = useCartStore((state)=> state.addToCart)
 
   const language = i18n.resolvedLanguage?.startsWith("ar") ? "ar" : "en";
   const isArabic = language === "ar";
@@ -60,7 +62,7 @@ export default function FeaturedDishes() {
       ) : (
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {data.map((dish) => (
-            <DishCard key={dish.id} dish={dish} language={language} />
+            <DishCard key={dish.id} dish={dish} language={language} addToCart={addToCart} />
           ))}
         </div>
       )}
