@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router";
 import logo from "../../assets/logo.png";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useCartStore } from "../../store/cartStore";
 
 export default function Navbar() {
   const navList = [
@@ -12,6 +13,8 @@ export default function Navbar() {
     { labelKey: "nav.contact", to: "/contact" },
   ];
 
+  const cart = useCartStore((state) => state.cart);
+  const cartCount = cart.reduce((total, item) => total + item.qty, 0);
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -54,7 +57,7 @@ export default function Navbar() {
             setSearchOpen((prev) => !prev);
             setOpen(false);
           }}
-          aria-label={searchOpen ? t('search.close') : t('search.open')}
+          aria-label={searchOpen ? t("search.close") : t("search.open")}
           aria-expanded={searchOpen}
           className="grid size-11 place-items-center rounded-full text-olive transition-colors hover:bg-sand/30 focus-visible:outline-2 focus-visible:outline-terracotta"
         >
@@ -67,14 +70,20 @@ export default function Navbar() {
 
         <Link
           to="/cart"
-          className="hidden md:grid size-11 place-items-center rounded-full hover:bg-sand/40 focus-visible:outline-2 focus-visible:outline-terracotta"
-          aria-label="Cart"
+          className="relative grid size-11 shrink-0 place-items-center rounded-full transition hover:bg-sand/40 focus-visible:outline-2 focus-visible:outline-terracotta"
+          aria-label={t("nav.cart")}
         >
           <ShoppingCart className="size-5" />
+
+          {cartCount > 0 && (
+            <span className="absolute -inset-e-0.5 -top-0.5 grid min-w-5 h-5 place-items-center rounded-full bg-terracotta px-1 text-[11px] font-semibold leading-none text-white">
+              {cartCount > 99 ? "99+" : cartCount}
+            </span>
+          )}
         </Link>
         <div className="relative hidden md:block">
           <select
-            aria-label={t('accessibility.chooseLanguage')}
+            aria-label={t("accessibility.chooseLanguage")}
             value={language}
             onChange={(e) => changeLanguage(e.target.value as "en" | "ar")}
             className="h-10 cursor-pointer appearance-none rounded-full border border-sand/70 bg-transparent py-2 ps-3 pe-9 text-sm font-semibold text-olive transition-colors hover:bg-sand/30 outline-none"
@@ -123,8 +132,8 @@ export default function Navbar() {
             type="search"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder={t('search.placeholder')}
-            aria-label= {t('accessibility.searchDishes')}
+            placeholder={t("search.placeholder")}
+            aria-label={t("accessibility.searchDishes")}
             autoFocus
             className="min-w-0 flex-1 bg-transparent text-sm text-charcoal outline-none placeholder:text-charcoal/50"
           />
@@ -133,7 +142,7 @@ export default function Navbar() {
             type="submit"
             className="rounded-full bg-olive px-4 py-2 text-xs font-semibold text-cream transition-colors hover:bg-charcoal"
           >
-            {t('search.button')}
+            {t("search.button")}
           </button>
         </form>
       )}
@@ -171,20 +180,10 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Cart link */}
-          <Link
-            to="/cart"
-            onClick={() => setOpen(false)}
-            className="mt-3 flex items-center gap-3 rounded-lg border border-sand/70 px-4 py-3.5 text-sm font-medium text-olive transition-colors hover:bg-sand/20"
-          >
-            <ShoppingCart className="size-5" strokeWidth={1.7} />
-            <span>{t('nav.cart')}</span>
-          </Link>
-
           {/* Language selector */}
           <div className="mt-4 flex items-center justify-between border-t border-sand/70 pt-4">
             <span className="text-xs font-medium uppercase tracking-widest text-charcoal/60">
-              {t('nav.language')}
+              {t("nav.language")}
             </span>
 
             <div
