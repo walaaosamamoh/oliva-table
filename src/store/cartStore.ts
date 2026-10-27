@@ -11,6 +11,7 @@ interface CartStore {
   addToCart: (dish: MenuItem, qty?: number) => void;
   removeFromCart: (dishId: string) => void;
   updateQuantity: (dishId: string, qty: number) => void;
+  clearCart: () => void;
 }
 
 export const useCartStore = create<CartStore>()(
@@ -55,6 +56,8 @@ export const useCartStore = create<CartStore>()(
           ),
         }));
       },
+
+      clearCart: () => set({ cart: [] }),
     }),
     { name: "oliva-table-cart" },
   ),
