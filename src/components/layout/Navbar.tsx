@@ -1,5 +1,5 @@
 import { ChevronDown, Menu, Search, ShoppingCart, X } from "lucide-react";
-import { Link, NavLink } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import logo from "../../assets/logo.png";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,6 +13,7 @@ export default function Navbar() {
     { labelKey: "nav.contact", to: "/contact" },
   ];
 
+  const navigate = useNavigate();
   const cart = useCartStore((state) => state.cart);
   const cartCount = cart.reduce((total, item) => total + item.qty, 0);
   const [open, setOpen] = useState(false);
@@ -117,11 +118,13 @@ export default function Navbar() {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+
             const query = searchQuery.trim();
 
             if (query) {
-              // Connect this to your menu search logic later.
-              console.log("Search:", query);
+              navigate(`/menu?search=${encodeURIComponent(query)}`);
+              setSearchOpen(false);
+              setSearchQuery("");
             }
           }}
           className="absolute inset-x-4 top-full z-20 mt-2 flex items-center gap-3 rounded-xl border border-sand/70 bg-cream p-3 shadow-lg md:inset-x-auto md:inset-e-8 md:w-96"
