@@ -55,6 +55,19 @@
     "error": "Unable to load featured dishes. Please try again later.",
     "empty": "No featured dishes available right now."
   },
+  "menu": {
+    "title": "Our Menu",
+    "categories": "Menu categories",
+    "loading": "Loading menu...",
+    "error": "We couldn't load the menu. Please try again.",
+    "results_one": "{{count}} dish found",
+    "results_other": "{{count}} dishes found",
+    "empty": "No dishes found.",
+    "clearFilters": "Clear filters"
+  },
+  "common": {
+    "retry": "Try Again"
+  },
   "cart": {
     "title": "Your Cart",
     "subtitle": "Review your items before checkout",
