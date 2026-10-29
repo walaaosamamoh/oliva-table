@@ -159,5 +159,27 @@
     "ctaTitle": "Your seat at the table is waiting.",
     "ctaDescription": "Discover our menu and find something delicious to share.",
     "ctaButton": "Explore Our Menu"
+  },
+  "contact": {
+    "eyebrow": "GET IN TOUCH",
+    "title": "We'd love to hear from you.",
+    "intro": "Have a question, a special request, or simply want to say hello? We're always happy to hear from you.",
+    "sideTitle": "Every good conversation starts somewhere.",
+    "sideDescription": "Whether you're planning a meal or exploring our menu, we're glad you're here. Send us a message and make yourself at home.",
+    "emailNote": "Have a question? Send us a message using the form.",
+    "menuLink": "Explore Our Menu",
+    "formTitle": "Send us a message",
+    "formDescription": "Fill in the details below and tell us what's on your mind.",
+    "name": "Full Name",
+    "namePlaceholder": "Enter your full name",
+    "email": "Email Address",
+    "emailPlaceholder": "Enter your email address",
+    "subject": "Subject",
+    "subjectPlaceholder": "What is your message about?",
+    "message": "Your Message",
+    "messagePlaceholder": "Write your message here...",
+    "send": "Send Message",
+    "successTitle": "Thank You!",
+    "sendAnother": "Write Another Message"
   }
 }

@@ -112,7 +112,7 @@ export default function About() {
 
           <Link
             to="/menu"
-            className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-olive px-6 py-3 font-medium text-cream transition hover:bg-charcoal focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-terracotta"
+            className="mt-8 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-olive px-6 py-3 font-medium text-cream transition hover:bg-olive/90 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-terracotta"
           >
             {t("about.ctaButton")}
             <ArrowUpRight
