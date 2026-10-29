@@ -28,8 +28,16 @@ export default function Navbar() {
   return (
     <header className="relative flex justify-between items-center border-b border-b-sand/50 py-2 px-4 md:px-8 text-olive">
       <Link to="/" className="flex items-center gap-2 font-bold">
-        <img src={logo} alt="" className="h-12 w-12 md:h-16 md:w-16" />
-        <span className="text-xl md:text-2xl uppercase">Oliva Table</span>
+        <img
+          src={logo}
+          alt=""
+          aria-hidden="true"
+          className="h-8 w-8 shrink-0 object-contain md:h-14 md:w-14"
+        />
+
+        <span className="font-serif text-xl uppercase md:text-2xl">
+          Oliva Table
+        </span>
       </Link>
 
       <nav className="hidden md:flex items-center gap-6 font-semibold">
