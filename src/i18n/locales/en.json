@@ -129,5 +129,35 @@
     "orderThanks": "Thank you for your order. Your order number is",
     "backHome": "Back to home",
     "backToCart": "Back to Cart"
+  },
+  "about": {
+    "eyebrow": "OUR STORY",
+    "title": "A table for good food and beautiful moments.",
+    "intro": "At Oliva Table, we believe the best meals are about more than what's on the plate. They're about the people we share them with, the conversations that unfold, and the memories we create together.",
+    "imageAlt": "A freshly prepared Mediterranean dish at Oliva Table",
+    "storyEyebrow": "HOW IT BEGAN",
+    "storyTitle": "Inspired by the Mediterranean way of living.",
+    "storyParagraph1": "Oliva Table was created around a simple idea: good food brings people together. Inspired by the warmth and simplicity of Mediterranean dining, we celebrate fresh ingredients, thoughtful preparation, and flavors worth sharing.",
+    "storyParagraph2": "Every dish is an invitation to slow down, gather around the table, and enjoy the little moments that make an ordinary day special.",
+    "valuesEyebrow": "WHAT MATTERS TO US",
+    "valuesTitle": "Made with care, shared with love.",
+    "valuesDescription": "The principles behind every dish and every moment at our table.",
+    "values": {
+      "fresh": {
+        "title": "Fresh Ingredients",
+        "description": "We celebrate the natural flavors of carefully selected ingredients and let simplicity shine."
+      },
+      "quality": {
+        "title": "Thoughtful Quality",
+        "description": "From preparation to presentation, we pay attention to the details that make a meal memorable."
+      },
+      "togetherness": {
+        "title": "Moments Together",
+        "description": "We believe food tastes better when shared with the people who matter most."
+      }
+    },
+    "ctaTitle": "Your seat at the table is waiting.",
+    "ctaDescription": "Discover our menu and find something delicious to share.",
+    "ctaButton": "Explore Our Menu"
   }
 }
