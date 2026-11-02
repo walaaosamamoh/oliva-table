@@ -1,14 +1,14 @@
 import { create } from "zustand";
-import type { MenuItem } from "../data/MenuData";
 import { persist } from "zustand/middleware";
+import type { Dish } from "../types/database";
 
-export type CartItem = MenuItem & {
+export type CartItem = Dish & {
   qty: number;
 };
 
 interface CartStore {
   cart: CartItem[];
-  addToCart: (dish: MenuItem, qty?: number) => void;
+  addToCart: (dish: Dish, qty?: number) => void;
   removeFromCart: (dishId: string) => void;
   updateQuantity: (dishId: string, qty: number) => void;
   clearCart: () => void;

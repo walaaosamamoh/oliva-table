@@ -10,7 +10,7 @@ export interface Category {
 
 export interface Dish {
   id: string;
-  category_id: string | null;
+  category_id: string;
   name: {
     en: string;
     ar: string;

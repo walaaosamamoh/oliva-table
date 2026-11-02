@@ -1,11 +1,12 @@
 import { Plus } from "lucide-react";
 import { Link } from "react-router";
-import type { MenuItem } from "../../data/MenuData";
+import type { Dish } from "../../types/database";
+
 
 interface MenuItemCardProps {
-  dish: MenuItem;
+  dish: Dish;
   language: "en" | "ar";
-  addToCart: (dish: MenuItem) => void;
+  addToCart: (dish: Dish) => void;
 }
 
 export default function MenuItemCard({ dish, language, addToCart }: MenuItemCardProps) {
@@ -24,7 +25,7 @@ export default function MenuItemCard({ dish, language, addToCart }: MenuItemCard
           loading="lazy"
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 motion-safe:group-hover:scale-105"
         />
-        {dish.isFeatured && (
+        {dish.is_featured && (
           <span className="absolute inset-s-2 top-2 hidden rounded-full bg-cream/95 px-3 py-1 text-xs font-medium text-olive shadow-sm sm:block">
             {isArabic ? "اختيار الشيف" : "Chef's Pick"}
           </span>

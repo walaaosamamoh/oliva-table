@@ -44,7 +44,7 @@ export default function Menu() {
     () =>
       (dishesQ.data ?? []).filter(
         (d) =>
-          (category === "all" || d.category === category) &&
+          (category === "all" || d.category_id === category) &&
           d.name[language].toLocaleLowerCase(language).includes(query),
       ),
     [dishesQ.data, category, query, language],

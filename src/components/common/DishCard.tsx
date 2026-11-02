@@ -1,11 +1,11 @@
 import { ArrowUpRight, Plus } from "lucide-react";
-import type { MenuItem } from "../../data/MenuData";
 import { Link } from "react-router";
+import type { Dish } from "../../types/database";
 
 interface DishCardProps {
-  dish: MenuItem;
+  dish: Dish;
   language: "en" | "ar";
-  addToCart: (dish: MenuItem) => void;
+  addToCart: (dish: Dish) => void;
 }
 
 export default function DishCard({
@@ -29,7 +29,7 @@ export default function DishCard({
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
 
-        {dish.isFeatured && (
+        {dish.is_featured && (
           <span className="absolute inset-s-4 top-4 rounded-full bg-cream/95 px-3 py-1.5 text-xs font-medium text-olive shadow-sm">
             {isArabic ? "اختيار الشيف" : "Chef's Pick"}
           </span>
