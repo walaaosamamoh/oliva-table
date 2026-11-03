@@ -8,6 +8,7 @@ import DeliveryFields from "../../components/checkout/DeliveryFields";
 import PaymentMethod from "../../components/checkout/PaymentMethod";
 import OrderSummary from "../../components/checkout/OrderSummary";
 import OrderSuccessModal from "../../components/checkout/OrderSuccessModal";
+import { useCreateOrder } from "../../hooks/useCreateOrder";
 
 export type Fulfillment = "delivery" | "pickup";
 
@@ -22,6 +23,8 @@ export interface CheckoutForm {
 }
 
 export default function Checkout() {
+  const createOrderMutation = useCreateOrder();
+  const [submitError, setSubmitError] = useState("");
   const { t } = useTranslation();
   const cart = useCartStore((state) => state.cart);
   const clearCart = useCartStore((state) => state.clearCart);
@@ -51,22 +54,37 @@ export default function Checkout() {
     0,
   );
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    if (createOrderMutation.isPending) return;
+
     if (!form.fullName.trim() || !form.phone.trim()) return;
+
     if (
       form.fulfillment === "delivery" &&
       (!form.address.trim() || !form.city.trim())
-    )
+    ) {
       return;
+    }
+
     if (form.phone.replace(/\D/g, "").length < 10) return;
 
-    const newOrderNumber = `OT${Date.now().toString().slice(-6)}`;
+    try {
+      setSubmitError("");
 
-    console.log({ orderNumber: newOrderNumber, form, cart, subtotal });
+      const orderId = await createOrderMutation.mutateAsync({
+        form,
+        cart,
+      });
 
-    setOrderNumber(newOrderNumber);
-    setShowSuccess(true);
-    clearCart();
+      const newOrderNumber = `OT${orderId.slice(0, 8).toUpperCase()}`;
+
+      setOrderNumber(newOrderNumber);
+      setShowSuccess(true);
+      clearCart();
+    } catch (error) {
+      console.error("Order submission failed:", error);
+      setSubmitError(t("checkout.submitError"));
+    }
   };
 
   if (cart.length === 0 && !showSuccess) {
@@ -104,13 +122,28 @@ export default function Checkout() {
           <PaymentMethod />
         </div>
 
-        <OrderSummary
-          cart={cart}
-          subtotal={subtotal}
-          notes={form.notes}
-          updateNotes={(value) => updateField("notes", value)}
-          onSubmit={handleSubmit}
-        />
+        <div>
+          {submitError && (
+            <p className="mb-3 text-sm text-red-600" role="alert">
+              {submitError}
+            </p>
+          )}
+
+          {createOrderMutation.isPending && (
+            <p className="mb-3 text-sm text-olive">
+              {t("checkout.submitting")}
+            </p>
+          )}
+
+          <OrderSummary
+            cart={cart}
+            subtotal={subtotal}
+            notes={form.notes}
+            updateNotes={(value) => updateField("notes", value)}
+            onSubmit={handleSubmit}
+            isSubmitting={createOrderMutation.isPending}
+          />
+        </div>
       </div>
 
       <Link to="/cart" className="mt-6 inline-block underline">

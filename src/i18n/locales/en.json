@@ -128,7 +128,9 @@
     "orderPlaced": "Order Placed!",
     "orderThanks": "Thank you for your order. Your order number is",
     "backHome": "Back to home",
-    "backToCart": "Back to Cart"
+    "backToCart": "Back to Cart",
+    "submitError": "Something went wrong. Please try again.",
+    "submitting": "Submitting your order..."
   },
   "about": {
     "eyebrow": "OUR STORY",

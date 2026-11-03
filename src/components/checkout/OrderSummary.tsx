@@ -7,6 +7,7 @@ interface Props {
   notes: string;
   updateNotes: (value: string) => void;
   onSubmit: () => void;
+  isSubmitting: boolean;
 }
 
 export default function OrderSummary({
@@ -15,6 +16,7 @@ export default function OrderSummary({
   notes,
   updateNotes,
   onSubmit,
+  isSubmitting,
 }: Props) {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.resolvedLanguage?.startsWith("ar");
@@ -28,9 +30,7 @@ export default function OrderSummary({
 
   return (
     <aside className="h-fit space-y-5 rounded-2xl border border-sand p-6">
-      <h2 className="text-xl font-semibold">
-        {t("checkout.orderSummary")}
-      </h2>
+      <h2 className="text-xl font-semibold">{t("checkout.orderSummary")}</h2>
 
       <div className="max-h-72 space-y-4 overflow-y-auto">
         {cart.map((item) => (
@@ -42,9 +42,7 @@ export default function OrderSummary({
             />
 
             <div className="min-w-0 flex-1">
-              <p className="font-medium">
-                {item.name[isArabic ? "ar" : "en"]}
-              </p>
+              <p className="font-medium">{item.name[isArabic ? "ar" : "en"]}</p>
               <p className="text-sm opacity-70">
                 {formatPrice(item.price)} × {item.qty}
               </p>
@@ -73,7 +71,11 @@ export default function OrderSummary({
 
       <div className="space-y-3 border-t border-sand pt-4">
         <div className="flex justify-between gap-4">
-          <span>{t("checkout.items", { count: cart.reduce((sum, item) => sum + item.qty, 0) })}</span>
+          <span>
+            {t("checkout.items", {
+              count: cart.reduce((sum, item) => sum + item.qty, 0),
+            })}
+          </span>
           <span>{formatPrice(subtotal)}</span>
         </div>
 
@@ -91,9 +93,10 @@ export default function OrderSummary({
       <button
         type="button"
         onClick={onSubmit}
-        className="w-full rounded-full bg-olive px-6 py-3 font-medium text-cream transition hover:bg-olive/90"
+        disabled={isSubmitting}
+        className="w-full rounded-full bg-olive px-6 py-3 font-medium text-cream transition hover:bg-olive/90 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {t("checkout.placeOrder")}
+        {isSubmitting ? t("checkout.submitting") : t("checkout.placeOrder")}
       </button>
     </aside>
   );
