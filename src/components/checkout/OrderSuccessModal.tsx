@@ -5,11 +5,13 @@ import { Link } from "react-router";
 interface Props {
   onClose: () => void;
   orderNumber: string;
+  orderId: string;
 }
 
 export default function OrderSuccessModal({
   onClose,
   orderNumber,
+  orderId,
 }: Props) {
   const { t } = useTranslation();
 
@@ -40,10 +42,7 @@ export default function OrderSuccessModal({
           strokeWidth={1.5}
         />
 
-        <h2
-          id="order-success-title"
-          className="mb-3 text-2xl font-semibold"
-        >
+        <h2 id="order-success-title" className="mb-3 text-2xl font-semibold">
           {t("checkout.orderPlaced")}
         </h2>
 
@@ -51,14 +50,20 @@ export default function OrderSuccessModal({
           {t("checkout.orderThanks")}
         </p>
 
-        <p className="mb-7 text-xl font-semibold text-olive">
-          #{orderNumber}
-        </p>
+        <p className="mb-7 text-xl font-semibold text-olive">#{orderNumber}</p>
+
+        <Link
+          to={`/track-order/${orderId}`}
+          onClick={onClose}
+          className="mb-3 block rounded-full bg-olive px-6 py-3 font-medium text-cream transition hover:bg-olive/90"
+        >
+          {t("checkout.trackOrder")}
+        </Link>
 
         <Link
           to="/"
           onClick={onClose}
-          className="block rounded-full bg-olive px-6 py-3 font-medium text-cream transition hover:bg-olive/90"
+          className="block rounded-full border border-olive px-6 py-3 font-medium text-olive transition hover:bg-olive/10"
         >
           {t("checkout.backHome")}
         </Link>

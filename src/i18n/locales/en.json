@@ -130,7 +130,8 @@
     "backHome": "Back to home",
     "backToCart": "Back to Cart",
     "submitError": "Something went wrong. Please try again.",
-    "submitting": "Submitting your order..."
+    "submitting": "Submitting your order...",
+    "trackOrder": "Track Your Order"
   },
   "about": {
     "eyebrow": "OUR STORY",

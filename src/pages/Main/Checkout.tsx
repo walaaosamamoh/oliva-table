@@ -41,6 +41,7 @@ export default function Checkout() {
 
   const [orderNumber, setOrderNumber] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [orderId, setOrderId] = useState("");
 
   const updateField = <K extends keyof CheckoutForm>(
     field: K,
@@ -71,14 +72,15 @@ export default function Checkout() {
     try {
       setSubmitError("");
 
-      const orderId = await createOrderMutation.mutateAsync({
+      const newOrderId = await createOrderMutation.mutateAsync({
         form,
         cart,
       });
 
-      const newOrderNumber = `OT${orderId.slice(0, 8).toUpperCase()}`;
+      const newOrderNumber = `OT${newOrderId.slice(0, 8).toUpperCase()}`;
 
       setOrderNumber(newOrderNumber);
+      setOrderId(newOrderId);
       setShowSuccess(true);
       clearCart();
     } catch (error) {
@@ -153,6 +155,7 @@ export default function Checkout() {
       {showSuccess && (
         <OrderSuccessModal
           orderNumber={orderNumber}
+          orderId={orderId}
           onClose={() => setShowSuccess(false)}
         />
       )}
