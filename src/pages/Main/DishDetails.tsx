@@ -20,7 +20,7 @@ export default function DishDetails() {
   const [quantity, setQuantity] = useState(1);
 
   const relatedDishes = menuDishes
-    ?.filter((item) => item.category === dish?.category && item.id !== dish?.id)
+    ?.filter((item) => item.category_id === dish?.category_id && item.id !== dish?.id)
     .slice(0, 3);
 
   if (isPending) {
