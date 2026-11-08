@@ -9,6 +9,7 @@ import PaymentMethod from "../../components/checkout/PaymentMethod";
 import OrderSummary from "../../components/checkout/OrderSummary";
 import OrderSuccessModal from "../../components/checkout/OrderSuccessModal";
 import { useCreateOrder } from "../../hooks/useCreateOrder";
+import { getOrderNumber } from "../../services/ordersService";
 
 export type Fulfillment = "delivery" | "pickup";
 
@@ -77,7 +78,9 @@ export default function Checkout() {
         cart,
       });
 
-      const newOrderNumber = `OT${newOrderId.slice(0, 8).toUpperCase()}`;
+      const newOrderNumber = await getOrderNumber(newOrderId);
+      console.log("New order ID:", newOrderId);
+      console.log("Retrieved order number:", newOrderNumber);
 
       setOrderNumber(newOrderNumber);
       setOrderId(newOrderId);

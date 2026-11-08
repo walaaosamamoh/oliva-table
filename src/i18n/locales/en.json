@@ -133,6 +133,25 @@
     "submitting": "Submitting your order...",
     "trackOrder": "Track Your Order"
   },
+  "tracking": {
+    "loading": "Loading your order...",
+    "notFound": "Order not found.",
+    "orderReference": "Order Reference",
+    "orderStatus": "Order Status",
+    "currentStatus": "Current status",
+    "orderDetails": "Order Details",
+    "fulfillment": "Fulfillment Method",
+    "delivery": "Delivery",
+    "pickup": "Pickup",
+    "status": {
+      "pending": "Pending",
+      "confirmed": "Confirmed",
+      "preparing": "Preparing",
+      "completed": "Completed",
+      "cancelled": "Cancelled"
+    },
+    "updating": "Checking for updates..."
+  },
   "about": {
     "eyebrow": "OUR STORY",
     "title": "A table for good food and beautiful moments.",

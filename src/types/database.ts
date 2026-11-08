@@ -25,3 +25,22 @@ export interface Dish {
   is_available: boolean;
   created_at: string;
 }
+
+export interface OrderTrackingItem {
+  dish_name: {
+    en: string;
+    ar: string;
+  };
+  unit_price: number;
+  quantity: number;
+}
+
+export interface OrderTracking {
+  id: string;
+  order_number: string;
+  status: "pending" | "confirmed" | "preparing" | "completed" | "cancelled";
+  fulfillment: "delivery" | "pickup";
+  total: number;
+  created_at: string;
+  items: OrderTrackingItem[];
+}

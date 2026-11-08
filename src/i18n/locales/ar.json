@@ -137,6 +137,25 @@
     "submitting": "جارٍ إرسال طلبك...",
     "trackOrder": "تتبع طلبك"
   },
+  "tracking": {
+    "loading": "جارٍ تحميل طلبك...",
+    "notFound": "لم يتم العثور على الطلب.",
+    "orderReference": "رقم الطلب",
+    "orderStatus": "حالة الطلب",
+    "currentStatus": "الحالة الحالية",
+    "orderDetails": "تفاصيل الطلب",
+    "fulfillment": "طريقة الاستلام",
+    "delivery": "التوصيل",
+    "pickup": "الاستلام من المطعم",
+    "status": {
+      "pending": "قيد الانتظار",
+      "confirmed": "تم تأكيد الطلب",
+      "preparing": "جاري تحضير طلبك",
+      "completed": "مكتمل",
+      "cancelled": "ملغي"
+    },
+    "updating": "جارٍ التحقق من التحديثات..."
+  },
   "about": {
     "eyebrow": "قصتنا",
     "title": "مائدة تجمع الطعام الطيب واللحظات الجميلة.",

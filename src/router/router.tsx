@@ -8,6 +8,7 @@ import Cart from "../pages/Main/Cart";
 import Checkout from "../pages/Main/Checkout";
 import About from "../pages/Main/About";
 import Contact from "../pages/Main/Contact";
+import TrackOrder from "../pages/Main/TrackOrder";
 
 export const router = createBrowserRouter([
    {
@@ -32,6 +33,10 @@ export const router = createBrowserRouter([
         {
             path: '/checkout',
             element: <Checkout/>
+        },
+        {
+            path: '/track-order/:orderId',
+            element: <TrackOrder/>
         },
         {
             path: '/about',
