@@ -150,7 +150,15 @@
       "completed": "Completed",
       "cancelled": "Cancelled"
     },
-    "updating": "Checking for updates..."
+    "updating": "Checking for updates...",
+    "lookupTitle": "Track Your Order",
+    "lookupDescription": "Enter your order number and phone number to check your order status.",
+    "orderNumber": "Order Number",
+    "phoneNumber": "Phone Number",
+    "trackOrder": "Track Order",
+    "lookingUp": "Checking...",
+    "lookupNotFound": "No order found. Please check your order number and phone number.",
+    "lookupError": "Something went wrong. Please try again."
   },
   "about": {
     "eyebrow": "OUR STORY",

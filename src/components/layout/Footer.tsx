@@ -1,4 +1,3 @@
-
 import { NavLink } from "react-router";
 import { useTranslation } from "react-i18next";
 import logo from "../../assets/logo2.png";
@@ -49,6 +48,15 @@ export default function Footer() {
             </NavLink>
           ))}
         </nav>
+      </div>
+
+      <div className="mt-6 text-center">
+        <NavLink
+          to="/track-order"
+          className="text-sm text-cream/70 underline underline-offset-4 transition-colors hover:text-terracotta"
+        >
+          {t("tracking.trackOrder")}
+        </NavLink>
       </div>
 
       <div className="mt-8 border-t border-cream/15 pt-6 text-center">
