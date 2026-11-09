@@ -15,6 +15,9 @@ export default function Hero() {
         alt=""
         fetchPriority="high"
         loading="eager"
+        width={1672}
+        height={941}
+        decoding="async"
         className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
       />
 

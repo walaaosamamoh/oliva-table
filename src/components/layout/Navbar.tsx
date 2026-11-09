@@ -33,6 +33,8 @@ export default function Navbar() {
           alt=""
           aria-hidden="true"
           className="h-12 w-12 shrink-0 object-contain md:h-14 md:w-14"
+          width={48}
+          height={48}
         />
 
         <span className="text-xl uppercase md:text-2xl">
