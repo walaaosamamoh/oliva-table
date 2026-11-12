@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "@fontsource-variable/inter";
 @import "@fontsource-variable/playfair-display";
-@import "@fontsource-variable/noto-sans-arabic";
 
 @theme {
   /* Colors */

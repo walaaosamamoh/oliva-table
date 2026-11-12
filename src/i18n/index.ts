@@ -28,18 +28,26 @@ i18n
     },
   });
 
-const updateDocumentDirection = (language: string) => {
+let arabicFontRequested = false;
+
+const loadArabicFont = () => {
+  if (arabicFontRequested) return;
+  arabicFontRequested = true;
+  import("@fontsource-variable/noto-sans-arabic/index.css").catch(() => {
+    arabicFontRequested = false; // allow a retry on the next language change
+  });
+};
+
+const applyLanguage = (language: string) => {
   const isArabic = language.startsWith("ar");
 
   document.documentElement.lang = isArabic ? "ar" : "en";
   document.documentElement.dir = isArabic ? "rtl" : "ltr";
+
+  if (isArabic) loadArabicFont();
 };
 
-// Set direction when the language changes.
-i18n.on("languageChanged", updateDocumentDirection);
-
-// Set direction on initial load.
-const initialLanguage = i18n.resolvedLanguage ?? i18n.language;
-updateDocumentDirection(initialLanguage);
+i18n.on("languageChanged", applyLanguage);
+applyLanguage(i18n.resolvedLanguage ?? i18n.language);
 
 export default i18n;
