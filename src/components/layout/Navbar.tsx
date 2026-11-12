@@ -1,6 +1,6 @@
 import { ChevronDown, Menu, Search, ShoppingCart, X } from "lucide-react";
 import { Link, NavLink, useNavigate } from "react-router";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/logo.webp";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useCartStore } from "../../store/cartStore";

@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
 import { ArrowUpRight } from "lucide-react";
-import storyImage from "../../assets/storyBowl.jpg";
+import storyImage from "../../assets/storyBowl.webp";
 
 export default function About() {
   const { t, i18n } = useTranslation();

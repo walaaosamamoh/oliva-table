@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { useTranslation } from "react-i18next";
-import hero from "../../assets/hero.png";
+import hero from "../../assets/hero.webp";
 
 const focus =
   "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cream";
@@ -15,9 +15,9 @@ export default function Hero() {
         alt=""
         fetchPriority="high"
         loading="eager"
-        width={1672}
-        height={941}
         decoding="async"
+        width={1290}
+        height={726}
         className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
       />
 
