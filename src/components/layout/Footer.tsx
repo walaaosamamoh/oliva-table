@@ -23,6 +23,8 @@ export default function Footer() {
           <img
             src={logo}
             alt="Oliva Table — Mediterranean Kitchen"
+            width={1747}
+            height={900}
             className="h-20 w-auto object-contain md:h-24"
           />
         </NavLink>
