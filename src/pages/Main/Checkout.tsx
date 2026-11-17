@@ -42,7 +42,6 @@ export default function Checkout() {
 
   const [orderNumber, setOrderNumber] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
-  const [orderId, setOrderId] = useState("");
 
   const updateField = <K extends keyof CheckoutForm>(
     field: K,
@@ -79,11 +78,8 @@ export default function Checkout() {
       });
 
       const newOrderNumber = await getOrderNumber(newOrderId);
-      console.log("New order ID:", newOrderId);
-      console.log("Retrieved order number:", newOrderNumber);
 
       setOrderNumber(newOrderNumber);
-      setOrderId(newOrderId);
       setShowSuccess(true);
       clearCart();
     } catch (error) {
@@ -158,7 +154,7 @@ export default function Checkout() {
       {showSuccess && (
         <OrderSuccessModal
           orderNumber={orderNumber}
-          orderId={orderId}
+          phone = {form.phone}
           onClose={() => setShowSuccess(false)}
         />
       )}

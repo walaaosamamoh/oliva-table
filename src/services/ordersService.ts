@@ -27,11 +27,16 @@ export async function createOrder(
 }
 
 export async function getOrderTracking(
-  orderId: string,
+  orderNumber: string,
+  phone: string,
 ): Promise<OrderTracking | null> {
-  const { data, error } = await supabase.rpc("get_order_tracking", {
-    p_order_id: orderId,
-  });
+  const { data, error } = await supabase.rpc(
+    "get_order_tracking_verified",
+    {
+      p_order_number: orderNumber.trim(),
+      p_phone: phone.trim(),
+    },
+  );
 
   if (error) throw error;
 
@@ -49,16 +54,3 @@ export async function getOrderNumber(orderId: string): Promise<string> {
   return data;
 }
 
-export async function findOrderForTracking(
-  orderNumber: string,
-  phone: string,
-): Promise<string | null> {
-  const {data, error} = await supabase.rpc("find_order_for_tracking", {
-    p_order_number: orderNumber,
-    p_phone: phone.trim()
-  })
-
-  if (error) throw error;
-
-  return data
-}

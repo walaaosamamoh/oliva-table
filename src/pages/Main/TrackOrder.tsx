@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router";
+import { useParams, Link, useNavigate, useLocation } from "react-router";
 import { useTranslation } from "react-i18next";
 import {
   CheckCircle2,
@@ -12,7 +12,12 @@ import { useOrderTracking } from "../../hooks/useOrderTracking";
 const statuses = ["pending", "confirmed", "preparing", "completed"] as const;
 
 export default function TrackOrder() {
-  const { orderId = "" } = useParams();
+  const { orderId: orderNumber = "" } = useParams();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const phone = (location.state as { phone?: string } | null)?.phone ?? "";
+
   const { t, i18n } = useTranslation();
   const isArabic = i18n.resolvedLanguage?.startsWith("ar");
 
@@ -21,7 +26,7 @@ export default function TrackOrder() {
     isLoading,
     isError,
     isFetching,
-  } = useOrderTracking(orderId);
+  } = useOrderTracking(orderNumber, phone);
 
   const formatPrice = (price: number) =>
     new Intl.NumberFormat(isArabic ? "ar-EG" : "en-EG", {
@@ -29,6 +34,23 @@ export default function TrackOrder() {
       currency: "EGP",
       maximumFractionDigits: 2,
     }).format(price);
+
+  if (!phone) {
+    return (
+      <main className="mx-auto max-w-3xl px-6 py-20 text-center">
+        <h1 className="mb-4 text-2xl font-semibold">
+          {t("tracking.lookupTitle")}
+        </h1>
+
+        <button
+          onClick={() => navigate("/track-order")}
+          className="rounded-full bg-olive px-8 py-3 text-cream"
+        >
+          {t("tracking.trackOrder")}
+        </button>
+      </main>
+    );
+  }
 
   if (isLoading) {
     return (

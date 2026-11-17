@@ -5,13 +5,13 @@ import { Link } from "react-router";
 interface Props {
   onClose: () => void;
   orderNumber: string;
-  orderId: string;
+  phone: string;
 }
 
 export default function OrderSuccessModal({
   onClose,
   orderNumber,
-  orderId,
+  phone,
 }: Props) {
   const { t } = useTranslation();
 
@@ -53,7 +53,8 @@ export default function OrderSuccessModal({
         <p className="mb-7 text-xl font-semibold text-olive">#{orderNumber}</p>
 
         <Link
-          to={`/track-order/${orderId}`}
+          to={`/track-order/${encodeURIComponent(orderNumber)}`}
+          state={{ phone }}
           onClick={onClose}
           className="mb-3 block rounded-full bg-olive px-6 py-3 font-medium text-cream transition hover:bg-olive/90"
         >

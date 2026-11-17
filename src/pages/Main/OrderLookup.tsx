@@ -1,7 +1,8 @@
+
 import { useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { useTranslation } from "react-i18next";
-import { findOrderForTracking } from "../../services/ordersService";
+import { getOrderTracking } from "../../services/ordersService";
 
 export default function OrderLookup() {
   const { t } = useTranslation();
@@ -21,14 +22,19 @@ export default function OrderLookup() {
       setError("");
       setIsSubmitting(true);
 
-      const orderId = await findOrderForTracking(orderNumber, phone);
+      const order = await getOrderTracking(orderNumber, phone);
 
-      if (!orderId) {
+      if (!order) {
         setError(t("tracking.lookupNotFound"));
         return;
       }
 
-      navigate(`/track-order/${orderId}`);
+      navigate(
+        `/track-order/${encodeURIComponent(order.order_number)}`,
+        {
+          state: { phone },
+        },
+      );
     } catch (err) {
       console.error("Order lookup failed:", err);
       setError(t("tracking.lookupError"));
