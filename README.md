@@ -1,75 +1,121 @@
-# React + TypeScript + Vite
+# 🌿 Oliva Table
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, bilingual restaurant website with a complete online ordering experience, built with React, TypeScript, and Supabase.
 
-Currently, two official plugins are available:
+**Live Demo:** [Oliva Table](https://oliva-table.vercel.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**GitHub Repository:** [oliva-table](https://github.com/walaaosamamoh/oliva-table)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Overview
 
-## Expanding the ESLint configuration
+Oliva Table is a full-stack restaurant web application inspired by Mediterranean dining. It provides customers with an intuitive experience to explore the menu, discover dishes, manage their shopping cart, and place delivery or pickup orders.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+The application supports English and Arabic, including right-to-left (RTL) layouts, and uses Supabase for database management and order processing.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Features
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### Customer Experience
+- Responsive design for mobile, tablet, and desktop.
+- Modern restaurant homepage and menu browsing.
+- Dish details with descriptions, images, and prices.
+- Menu search and category filtering.
+- Shopping cart with quantity management.
+- Checkout with delivery and pickup options.
+- Order confirmation with a unique order number.
+- Guest order tracking using order number and phone number.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Internationalization
+- English and Arabic language support.
+- Right-to-left (RTL) layout for Arabic.
+- Language preference detection and persistence.
 
-```
+### Data & Backend
+- Supabase PostgreSQL database integration.
+- Dynamic menu and category data.
+- Order creation and order-item management.
+- Server-side order validation and price calculation through PostgreSQL functions.
+- Automatic order-status updates reflected in the tracking page.
+- Row Level Security (RLS) and controlled database access.
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+## Tech Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+| Technology | Purpose |
+|---|---|
+| React 19 | UI development |
+| TypeScript | Type safety |
+| React Router | Client-side routing |
+| Tailwind CSS 4 | Styling and responsive layouts |
+| TanStack Query | Server-state management |
+| Zustand | Shopping cart state management |
+| Supabase | PostgreSQL database and backend |
+| i18next | English and Arabic translations |
+| Lucide React | Icons |
+| Vite | Development and build tooling |
+| Vercel | Deployment |
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Architecture & Implementation
 
-```
+The application separates UI components, hooks, services, and state management to keep the code organized and maintainable.
+
+- **TanStack Query:** Handles server data fetching, caching, and order tracking updates.
+- **Zustand:** Manages shared cart state across the application.
+- **Supabase RPC:** Handles sensitive database operations, including order creation and verified guest order tracking.
+- **i18next:** Manages translations and language direction.
+- **React Router:** Handles application navigation and route-based pages.
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js
+- npm
+- A Supabase project
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/walaaosamamoh/oliva-table.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd oliva-table
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Create a `.env` file in the project root and configure your Supabase credentials:
+
+   ```env
+   VITE_SUPABASE_URL=your_supabase_project_url
+   VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+   ```
+
+5. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+## Future Improvements
+
+- Restaurant administration dashboard.
+- Online payment integration.
+- More advanced order management features.
+
+## Author
+
+**Walaa Osama**
+
+---
+
+*Built with care using React, TypeScript, and Supabase.*
