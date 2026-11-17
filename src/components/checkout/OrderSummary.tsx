@@ -1,9 +1,11 @@
+
 import { useTranslation } from "react-i18next";
 import type { CartItem } from "../../store/cartStore";
 
 interface Props {
   cart: CartItem[];
   subtotal: number;
+  fulfillment: "delivery" | "pickup";
   notes: string;
   updateNotes: (value: string) => void;
   onSubmit: () => void;
@@ -13,6 +15,7 @@ interface Props {
 export default function OrderSummary({
   cart,
   subtotal,
+  fulfillment,
   notes,
   updateNotes,
   onSubmit,
@@ -20,6 +23,9 @@ export default function OrderSummary({
 }: Props) {
   const { t, i18n } = useTranslation();
   const isArabic = i18n.resolvedLanguage?.startsWith("ar");
+
+  const deliveryFee = fulfillment === "delivery" ? 50 : 0;
+  const total = subtotal + deliveryFee;
 
   const formatPrice = (price: number) =>
     new Intl.NumberFormat(isArabic ? "ar-EG" : "en-EG", {
@@ -30,7 +36,9 @@ export default function OrderSummary({
 
   return (
     <aside className="h-fit space-y-5 rounded-2xl border border-sand p-6">
-      <h2 className="text-xl font-semibold">{t("checkout.orderSummary")}</h2>
+      <h2 className="text-xl font-semibold">
+        {t("checkout.orderSummary")}
+      </h2>
 
       <div className="max-h-72 space-y-4 overflow-y-auto">
         {cart.map((item) => (
@@ -42,7 +50,9 @@ export default function OrderSummary({
             />
 
             <div className="min-w-0 flex-1">
-              <p className="font-medium">{item.name[isArabic ? "ar" : "en"]}</p>
+              <p className="font-medium">
+                {item.name[isArabic ? "ar" : "en"]}
+              </p>
               <p className="text-sm opacity-70">
                 {formatPrice(item.price)} × {item.qty}
               </p>
@@ -59,6 +69,7 @@ export default function OrderSummary({
         <label htmlFor="notes" className="block text-sm font-medium">
           {t("checkout.notes")}
         </label>
+
         <textarea
           id="notes"
           value={notes}
@@ -81,12 +92,16 @@ export default function OrderSummary({
 
         <div className="flex justify-between gap-4 text-sm">
           <span>{t("checkout.deliveryFee")}</span>
-          <span>{t("checkout.calculatedLater")}</span>
+          <span>
+            {fulfillment === "delivery"
+              ? formatPrice(deliveryFee)
+              : t("checkout.free")}
+          </span>
         </div>
 
         <div className="flex justify-between gap-4 border-t border-sand pt-3 text-lg font-semibold">
           <span>{t("checkout.total")}</span>
-          <span>{formatPrice(subtotal)}</span>
+          <span>{formatPrice(total)}</span>
         </div>
       </div>
 

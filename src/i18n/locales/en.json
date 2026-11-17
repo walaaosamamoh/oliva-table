@@ -131,7 +131,8 @@
     "backToCart": "Back to Cart",
     "submitError": "Something went wrong. Please try again.",
     "submitting": "Submitting your order...",
-    "trackOrder": "Track Your Order"
+    "trackOrder": "Track Your Order",
+    "free": "Free"
   },
   "tracking": {
     "loading": "Loading your order...",

@@ -251,9 +251,28 @@ export default function TrackOrder() {
           ))}
         </div>
 
-        <div className="mt-5 flex justify-between border-t border-sand pt-4 text-lg font-semibold">
-          <span>{t("checkout.total")}</span>
-          <span>{formatPrice(Number(order.total))}</span>
+        <div className="mt-5 space-y-3 border-t border-sand pt-4">
+          {/* Subtotal */}
+          <div className="flex justify-between gap-4 text-sm">
+            <span>{t("checkout.subtotal")}</span>
+            <span>{formatPrice(Number(order.subtotal))}</span>
+          </div>
+
+          {/* Delivery fee */}
+          <div className="flex justify-between gap-4 text-sm">
+            <span>{t("checkout.deliveryFee")}</span>
+            <span>
+              {Number(order.delivery_fee) > 0
+                ? formatPrice(Number(order.delivery_fee))
+                : t("checkout.free")}
+            </span>
+          </div>
+
+          {/* Total */}
+          <div className="flex justify-between gap-4 border-t border-sand pt-3 text-lg font-semibold">
+            <span>{t("checkout.total")}</span>
+            <span>{formatPrice(Number(order.total))}</span>
+          </div>
         </div>
       </section>
 

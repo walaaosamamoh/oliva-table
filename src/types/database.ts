@@ -40,6 +40,8 @@ export interface OrderTracking {
   order_number: string;
   status: "pending" | "confirmed" | "preparing" | "completed" | "cancelled";
   fulfillment: "delivery" | "pickup";
+  subtotal: number;
+  delivery_fee: number;
   total: number;
   created_at: string;
   items: OrderTrackingItem[];

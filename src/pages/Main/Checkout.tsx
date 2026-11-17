@@ -139,6 +139,7 @@ export default function Checkout() {
           <OrderSummary
             cart={cart}
             subtotal={subtotal}
+            fulfillment={form.fulfillment}
             notes={form.notes}
             updateNotes={(value) => updateField("notes", value)}
             onSubmit={handleSubmit}
