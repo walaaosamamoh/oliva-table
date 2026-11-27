@@ -3,10 +3,15 @@ import type { CartItem } from "../store/cartStore";
 import type { CheckoutForm } from "../pages/Main/Checkout";
 import type { OrderTracking } from "../types/database";
 
+export interface CreateOrderResult {
+  id: string;
+  order_number: string;
+}
+
 export async function createOrder(
   form: CheckoutForm,
   cart: CartItem[],
-): Promise<string> {
+): Promise<CreateOrderResult> {
   const { data, error } = await supabase.rpc("create_order", {
     p_customer_name: form.fullName,
     p_phone: form.phone,
@@ -23,7 +28,11 @@ export async function createOrder(
 
   if (error) throw error;
 
-  return data;
+  if (!data?.id || !data?.order_number) {
+    throw new Error("Invalid order creation response");
+  }
+
+  return data as CreateOrderResult;
 }
 
 export async function getOrderTracking(
@@ -43,14 +52,14 @@ export async function getOrderTracking(
   return data as OrderTracking | null;
 }
 
-export async function getOrderNumber(orderId: string): Promise<string> {
-  const { data, error } = await supabase.rpc("get_order_number", {
-    p_order_id: orderId,
-  });
+// export async function getOrderNumber(orderId: string): Promise<string> {
+//   const { data, error } = await supabase.rpc("get_order_number", {
+//     p_order_id: orderId,
+//   });
 
-  if (error) throw error;
-  if (!data) throw new Error("Order number not found");
+//   if (error) throw error;
+//   if (!data) throw new Error("Order number not found");
 
-  return data;
-}
+//   return data;
+// }
 

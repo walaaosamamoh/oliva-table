@@ -8,7 +8,6 @@ interface Props {
   fulfillment: "delivery" | "pickup";
   notes: string;
   updateNotes: (value: string) => void;
-  onSubmit: () => void;
   isSubmitting: boolean;
 }
 
@@ -18,7 +17,6 @@ export default function OrderSummary({
   fulfillment,
   notes,
   updateNotes,
-  onSubmit,
   isSubmitting,
 }: Props) {
   const { t, i18n } = useTranslation();
@@ -53,6 +51,7 @@ export default function OrderSummary({
               <p className="font-medium">
                 {item.name[isArabic ? "ar" : "en"]}
               </p>
+
               <p className="text-sm opacity-70">
                 {formatPrice(item.price)} × {item.qty}
               </p>
@@ -87,11 +86,13 @@ export default function OrderSummary({
               count: cart.reduce((sum, item) => sum + item.qty, 0),
             })}
           </span>
+
           <span>{formatPrice(subtotal)}</span>
         </div>
 
         <div className="flex justify-between gap-4 text-sm">
           <span>{t("checkout.deliveryFee")}</span>
+
           <span>
             {fulfillment === "delivery"
               ? formatPrice(deliveryFee)
@@ -106,12 +107,13 @@ export default function OrderSummary({
       </div>
 
       <button
-        type="button"
-        onClick={onSubmit}
-        disabled={isSubmitting}
+        type="submit"
+        disabled={isSubmitting || cart.length === 0}
         className="w-full rounded-full bg-olive px-6 py-3 font-medium text-cream transition hover:bg-olive/90 disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {isSubmitting ? t("checkout.submitting") : t("checkout.placeOrder")}
+        {isSubmitting
+          ? t("checkout.submitting")
+          : t("checkout.placeOrder")}
       </button>
     </aside>
   );

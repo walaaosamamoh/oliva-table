@@ -122,7 +122,7 @@
     "emptyCartDescription": "Add some delicious dishes before checking out.",
     "exploreMenu": "Explore Menu",
     "required": "This field is required",
-    "invalidPhone": "Enter a valid phone number",
+    "invalidPhone": "Please enter a valid phone number with at least 10 digits.",
     "orderError": "Something went wrong. Please try again.",
     "demoNotice": "Checkout is a demo. No real order or payment will be processed.",
     "orderPlaced": "Order Placed!",

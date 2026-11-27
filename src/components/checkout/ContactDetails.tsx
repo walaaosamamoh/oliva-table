@@ -1,3 +1,4 @@
+
 import { useTranslation } from "react-i18next";
 import type { CheckoutForm } from "../../pages/Main/Checkout";
 
@@ -7,9 +8,14 @@ interface Props {
     field: K,
     value: CheckoutForm[K],
   ) => void;
+  phoneError: string;
 }
 
-export default function ContactDetails({ form, updateField }: Props) {
+export default function ContactDetails({
+  form,
+  updateField,
+  phoneError,
+}: Props) {
   const { t } = useTranslation();
 
   const fields = [
@@ -19,6 +25,7 @@ export default function ContactDetails({ form, updateField }: Props) {
       placeholder: t("checkout.namePlaceholder"),
       type: "text",
       required: true,
+      autoComplete: "name",
     },
     {
       name: "phone" as const,
@@ -26,6 +33,7 @@ export default function ContactDetails({ form, updateField }: Props) {
       placeholder: t("checkout.phonePlaceholder"),
       type: "tel",
       required: true,
+      autoComplete: "tel",
     },
     {
       name: "email" as const,
@@ -33,6 +41,7 @@ export default function ContactDetails({ form, updateField }: Props) {
       placeholder: t("checkout.emailPlaceholder"),
       type: "email",
       required: false,
+      autoComplete: "email",
     },
   ];
 
@@ -44,7 +53,10 @@ export default function ContactDetails({ form, updateField }: Props) {
 
       {fields.map((field) => (
         <div key={field.name} className="space-y-2">
-          <label htmlFor={field.name} className="block text-sm font-medium">
+          <label
+            htmlFor={field.name}
+            className="block text-sm font-medium"
+          >
             {field.label}
           </label>
 
@@ -55,8 +67,27 @@ export default function ContactDetails({ form, updateField }: Props) {
             onChange={(e) => updateField(field.name, e.target.value)}
             placeholder={field.placeholder}
             required={field.required}
+            autoComplete={field.autoComplete}
+            aria-invalid={
+              field.name === "phone" && Boolean(phoneError)
+            }
+            aria-describedby={
+              field.name === "phone" && phoneError
+                ? "phone-error"
+                : undefined
+            }
             className="w-full rounded-xl border border-sand bg-transparent px-4 py-3 outline-none focus:border-olive"
           />
+
+          {field.name === "phone" && phoneError && (
+            <p
+              id="phone-error"
+              className="text-sm text-red-600"
+              role="alert"
+            >
+              {phoneError}
+            </p>
+          )}
         </div>
       ))}
     </section>

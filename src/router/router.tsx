@@ -1,15 +1,36 @@
+import { createElement, lazy, Suspense, type ReactNode } from "react";
 import { createBrowserRouter } from "react-router";
 import MainLayout from "../layouts/MainLayout";
-import Home from "../pages/Main/Home";
-import NotFound from "../pages/NotFound";
-import Menu from "../pages/Main/Menu";
-import DishDetails from "../pages/Main/DishDetails";
-import Cart from "../pages/Main/Cart";
-import Checkout from "../pages/Main/Checkout";
-import About from "../pages/Main/About";
-import Contact from "../pages/Main/Contact";
-import TrackOrder from "../pages/Main/TrackOrder";
-import OrderLookup from "../pages/Main/OrderLookup";
+
+const homePage = lazy(() => import("../pages/Main/Home"));
+const menuPage = lazy(() => import("../pages/Main/Menu"));
+const dishDetailsPage = lazy(() => import("../pages/Main/DishDetails"));
+const cartPage = lazy(() => import("../pages/Main/Cart"));
+const checkoutPage = lazy(() => import("../pages/Main/Checkout"));
+const aboutPage = lazy(() => import("../pages/Main/About"));
+const contactPage = lazy(() => import("../pages/Main/Contact"));
+const trackOrderPage = lazy(() => import("../pages/Main/TrackOrder"));
+const orderLookupPage = lazy(() => import("../pages/Main/OrderLookup"));
+const notFoundPage = lazy(() => import("../pages/NotFound"));
+
+function withRouteFallback(element: ReactNode) {
+  return (
+    <Suspense
+      fallback={
+        <div
+          className="flex min-h-[60vh] items-center justify-center"
+          role="status"
+          aria-live="polite"
+        >
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-sand border-t-olive" />
+          <span className="sr-only">Loading page...</span>
+        </div>
+      }
+    >
+      {element}
+    </Suspense>
+  );
+}
 
 export const router = createBrowserRouter([
   {
@@ -17,44 +38,44 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: withRouteFallback(createElement(homePage)),
       },
       {
         path: "/menu",
-        element: <Menu />,
+        element: withRouteFallback(createElement(menuPage)),
       },
       {
         path: "/menu/:id",
-        element: <DishDetails />,
+        element: withRouteFallback(createElement(dishDetailsPage)),
       },
       {
         path: "/cart",
-        element: <Cart />,
+        element: withRouteFallback(createElement(cartPage)),
       },
       {
         path: "/checkout",
-        element: <Checkout />,
+        element: withRouteFallback(createElement(checkoutPage)),
       },
       {
-        path: "track-order",
-        element: <OrderLookup />,
+        path: "/track-order",
+        element: withRouteFallback(createElement(orderLookupPage)),
       },
       {
         path: "/track-order/:orderId",
-        element: <TrackOrder />,
+        element: withRouteFallback(createElement(trackOrderPage)),
       },
       {
         path: "/about",
-        element: <About />,
+        element: withRouteFallback(createElement(aboutPage)),
       },
       {
         path: "/contact",
-        element: <Contact />,
+        element: withRouteFallback(createElement(contactPage)),
       },
     ],
   },
   {
     path: "*",
-    element: <NotFound />,
+    element: withRouteFallback(createElement(notFoundPage)),
   },
 ]);

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router";
 import { useCartStore } from "../../store/cartStore";
@@ -9,7 +9,6 @@ import PaymentMethod from "../../components/checkout/PaymentMethod";
 import OrderSummary from "../../components/checkout/OrderSummary";
 import OrderSuccessModal from "../../components/checkout/OrderSuccessModal";
 import { useCreateOrder } from "../../hooks/useCreateOrder";
-import { getOrderNumber } from "../../services/ordersService";
 
 export type Fulfillment = "delivery" | "pickup";
 
@@ -26,6 +25,8 @@ export interface CheckoutForm {
 export default function Checkout() {
   const createOrderMutation = useCreateOrder();
   const [submitError, setSubmitError] = useState("");
+  const [phoneError, setPhoneError] = useState("");
+
   const { t } = useTranslation();
   const cart = useCartStore((state) => state.cart);
   const clearCart = useCartStore((state) => state.clearCart);
@@ -47,6 +48,10 @@ export default function Checkout() {
     field: K,
     value: CheckoutForm[K],
   ) => {
+    if (field === "phone") {
+      setPhoneError("");
+    }
+
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -55,31 +60,29 @@ export default function Checkout() {
     0,
   );
 
-  const handleSubmit = async () => {
-    if (createOrderMutation.isPending) return;
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
 
-    if (!form.fullName.trim() || !form.phone.trim()) return;
+    if (createOrderMutation.isPending || cart.length === 0) return;
 
-    if (
-      form.fulfillment === "delivery" &&
-      (!form.address.trim() || !form.city.trim())
-    ) {
+    const phoneDigits = form.phone.replace(/\D/g, "");
+
+    if (phoneDigits.length < 10) {
+      setPhoneError(t("checkout.invalidPhone"));
+      document.getElementById("phone")?.focus();
       return;
     }
 
-    if (form.phone.replace(/\D/g, "").length < 10) return;
-
     try {
       setSubmitError("");
+      setPhoneError("");
 
-      const newOrderId = await createOrderMutation.mutateAsync({
+      const result = await createOrderMutation.mutateAsync({
         form,
         cart,
       });
 
-      const newOrderNumber = await getOrderNumber(newOrderId);
-
-      setOrderNumber(newOrderNumber);
+      setOrderNumber(result.order_number);
       setShowSuccess(true);
       clearCart();
     } catch (error) {
@@ -94,7 +97,9 @@ export default function Checkout() {
         <h1 className="mb-4 text-2xl font-semibold">
           {t("checkout.emptyCart")}
         </h1>
+
         <p className="mb-6">{t("checkout.emptyCartDescription")}</p>
+
         <Link to="/menu" className="rounded-full bg-olive px-6 py-3 text-cream">
           {t("checkout.exploreMenu")}
         </Link>
@@ -105,57 +110,63 @@ export default function Checkout() {
   return (
     <main className="mx-auto max-w-6xl px-6 py-12">
       <h1 className="mb-2 text-3xl font-semibold">{t("checkout.title")}</h1>
+
       <p className="mb-8">{t("checkout.subtitle")}</p>
 
-      <div className="grid gap-8 lg:grid-cols-[1fr_380px]">
-        <div className="space-y-6">
-          <ContactDetails form={form} updateField={updateField} />
+      <form onSubmit={handleSubmit}>
+        <div className="grid gap-8 lg:grid-cols-[1fr_380px]">
+          <div className="space-y-6">
+            <ContactDetails
+              form={form}
+              updateField={updateField}
+              phoneError={phoneError}
+            />
 
-          <FulfillmentOptions
-            value={form.fulfillment}
-            onChange={(value) => updateField("fulfillment", value)}
-          />
+            <FulfillmentOptions
+              value={form.fulfillment}
+              onChange={(value) => updateField("fulfillment", value)}
+            />
 
-          {form.fulfillment === "delivery" && (
-            <DeliveryFields form={form} updateField={updateField} />
-          )}
+            {form.fulfillment === "delivery" && (
+              <DeliveryFields form={form} updateField={updateField} />
+            )}
 
-          <PaymentMethod />
+            <PaymentMethod />
+          </div>
+
+          <div>
+            {submitError && (
+              <p className="mb-3 text-sm text-red-600" role="alert">
+                {submitError}
+              </p>
+            )}
+
+            {createOrderMutation.isPending && (
+              <p className="mb-3 text-sm text-olive" role="status">
+                {t("checkout.submitting")}
+              </p>
+            )}
+
+            <OrderSummary
+              cart={cart}
+              subtotal={subtotal}
+              fulfillment={form.fulfillment}
+              notes={form.notes}
+              updateNotes={(value) => updateField("notes", value)}
+              isSubmitting={createOrderMutation.isPending}
+            />
+          </div>
         </div>
 
-        <div>
-          {submitError && (
-            <p className="mb-3 text-sm text-red-600" role="alert">
-              {submitError}
-            </p>
-          )}
-
-          {createOrderMutation.isPending && (
-            <p className="mb-3 text-sm text-olive">
-              {t("checkout.submitting")}
-            </p>
-          )}
-
-          <OrderSummary
-            cart={cart}
-            subtotal={subtotal}
-            fulfillment={form.fulfillment}
-            notes={form.notes}
-            updateNotes={(value) => updateField("notes", value)}
-            onSubmit={handleSubmit}
-            isSubmitting={createOrderMutation.isPending}
-          />
-        </div>
-      </div>
-
-      <Link to="/cart" className="mt-6 inline-block underline">
-        {t("checkout.backToCart")}
-      </Link>
+        <Link to="/cart" className="mt-6 inline-block underline">
+          {t("checkout.backToCart")}
+        </Link>
+      </form>
 
       {showSuccess && (
         <OrderSuccessModal
           orderNumber={orderNumber}
-          phone = {form.phone}
+          phone={form.phone}
           onClose={() => setShowSuccess(false)}
         />
       )}

@@ -33,13 +33,9 @@ export default function Navbar() {
           alt=""
           aria-hidden="true"
           className="h-12 w-12 shrink-0 object-contain md:h-14 md:w-14"
-          width={48}
-          height={48}
         />
 
-        <span className="text-xl uppercase md:text-2xl">
-          Oliva Table
-        </span>
+        <span className="text-xl uppercase md:text-2xl">Oliva Table</span>
       </Link>
 
       <nav className="hidden md:flex items-center gap-6 font-semibold">
