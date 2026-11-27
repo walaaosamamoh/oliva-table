@@ -1,15 +1,15 @@
 import salad from "../assets/menuDishes/salad.webp";
-import hummus from "../assets/menuDishes/classic-hummus.jpg";
-import bruschetta from "../assets/menuDishes/bruschetta.jpg";
+import hummus from "../assets/menuDishes/classic-hummus.webp";
+import bruschetta from "../assets/menuDishes/bruschetta.webp";
 import pasta from "../assets/menuDishes/creamy-mushroom-pasta.webp";
 import grilledChicken from "../assets/menuDishes/grilled-chicken.webp";
 import pizza from "../assets/menuDishes/margherita-pizza.webp";
-import grilledSalmon from "../assets/menuDishes/grilled-salmon.jpg";
-import vegetableRisotto from "../assets/menuDishes/vegetable-risotto.jpg";
-import tiramisu from "../assets/menuDishes/tiramisu.jpg";
-import pannaCotta from "../assets/menuDishes/panna-cotta.jpg";
-import lemonade from "../assets/menuDishes/lemonade.jpg";
-import icedCoffee from "../assets/menuDishes/iced-coffee.jpg";
+import grilledSalmon from "../assets/menuDishes/grilled-salmon.webp";
+import vegetableRisotto from "../assets/menuDishes/vegetable-risotto.webp";
+import tiramisu from "../assets/menuDishes/tiramisu.webp";
+import pannaCotta from "../assets/menuDishes/panna-cotta.webp";
+import lemonade from "../assets/menuDishes/lemonade.webp";
+import icedCoffee from "../assets/menuDishes/iced-coffee.webp";
 
 export const dishImages: Record<string, string> = {
   "mediterranean-salad": salad,
