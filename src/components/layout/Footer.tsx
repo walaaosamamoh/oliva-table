@@ -24,6 +24,10 @@ export default function Footer() {
             src={logo}
             alt="Oliva Table — Mediterranean Kitchen"
             className="h-20 w-auto object-contain md:h-24"
+            width={1536}
+            height={1024}
+            loading="lazy"
+            decoding="async"
           />
         </NavLink>
 
